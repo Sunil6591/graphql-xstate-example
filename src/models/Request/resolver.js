@@ -9,4 +9,10 @@ export default {
       .Request
       .getRequests(args, context),
   },
+  Mutation: {
+    saveRequest: (_, args, context) => context
+      .models
+      .Request
+      .saveRequests(args, context),
+  },
 };

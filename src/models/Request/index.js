@@ -18,4 +18,9 @@ export default class Request {
   getRequestById(id) {
     return requests.find((r) => r.id === id);
   }
+
+  saveRequests({ request }) {
+    requests.push(request);
+    return request;
+  }
 }
