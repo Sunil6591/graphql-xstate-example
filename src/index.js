@@ -12,6 +12,9 @@ const resolvers = {
 };
 
 const getContext = {
+  user: {
+    roles: ['admin'],
+  },
   models: {
     Request: new Request(),
   },
