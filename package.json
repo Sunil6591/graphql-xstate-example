@@ -1,0 +1,38 @@
+{
+  "name": "graphql-xstate-example",
+  "version": "1.0.0",
+  "description": "Server side workflow using graphql and xstate",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --exec babel-node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sunil6591/graphql-xstate-example.git"
+  },
+  "keywords": [
+    "xstate",
+    "graphql",
+    "nodejs",
+    "express",
+    "workflow"
+  ],
+  "author": "Sunil Joshi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sunil6591/graphql-xstate-example/issues"
+  },
+  "homepage": "https://github.com/Sunil6591/graphql-xstate-example#readme",
+  "dependencies": {
+    "apollo-server": "^2.11.0",
+    "graphql": "^14.6.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/node": "^7.8.3",
+    "babel-core": "^7.0.0-bridge.0",
+    "nodemon": "^2.0.2"
+  }
+}
