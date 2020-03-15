@@ -1,35 +1,23 @@
 import { ApolloServer, gql } from 'apollo-server';
+import RequestType from './models/Request/type';
+import RequestResolver from './models/Request/resolver';
+import Request from './models/Request';
 
 const typeDefs = gql`
-  # to keep it simple
-  type Request {
-    id: String
-    type: String
-  }
-
-  type Query {
-    requests: [Request]
-  }
+  ${RequestType}
 `;
 
 const resolvers = {
-  Query: {
-    requests: () => [
-      {
-        id: '111',
-        type: 'REQUEST',
-      },
-    ],
+  ...RequestResolver,
+};
+
+const getContext = {
+  models: {
+    Request: new Request(),
   },
 };
 
-const context = {
-  user: {
-    roles: ['admin'],
-  },
-};
-
-const server = new ApolloServer({ typeDefs, resolvers, context });
+const server = new ApolloServer({ typeDefs, resolvers, context: getContext });
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
