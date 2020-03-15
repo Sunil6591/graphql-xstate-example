@@ -17,8 +17,8 @@ const resolvers = {
     requests: () => [
       {
         id: '111',
-        type: 'REQUEST'
-      }
+        type: 'REQUEST',
+      },
     ],
   },
 };
@@ -27,5 +27,6 @@ const server = new ApolloServer({ typeDefs, resolvers });
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {
+  // eslint-disable-next-line no-console
   console.log(`🚀  Server ready at ${url}`);
 });
