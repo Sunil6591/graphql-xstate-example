@@ -23,7 +23,13 @@ const resolvers = {
   },
 };
 
-const server = new ApolloServer({ typeDefs, resolvers });
+const context = {
+  user: {
+    roles: ['admin'],
+  },
+};
+
+const server = new ApolloServer({ typeDefs, resolvers, context });
 
 // The `listen` method launches a web server.
 server.listen().then(({ url }) => {

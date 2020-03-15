@@ -1,6 +1,10 @@
 # graphql-xstate-example
 Server side workflow using graphql and xstate
 
+## Installing
+
+`npm install`
+
 ## Starting server
 
 `npm start`
