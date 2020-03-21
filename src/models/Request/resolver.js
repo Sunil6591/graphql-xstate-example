@@ -14,5 +14,13 @@ export default {
       .models
       .Request
       .saveRequests(args, context),
+    updateRequest: (_, args, context) => context
+      .models
+      .Request
+      .updateRequest(args, context),
+    executeRequest: (_, args, context) => context
+      .models
+      .Request
+      .executeRequest(args, context),
   },
 };

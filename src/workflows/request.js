@@ -1,16 +1,8 @@
 import { Machine } from 'xstate';
 
 export default Machine({
-  id: 'draft',
+  id: 'request',
   initial: 'draft',
-  context: {
-    user: {
-      roles: ['admin'],
-    },
-    payload: {
-      vacationDates: [],
-    },
-  },
   states: {
     draft: {
       on: {

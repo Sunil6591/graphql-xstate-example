@@ -1,14 +1,17 @@
 import { ApolloServer, gql } from 'apollo-server';
+import GraphQLJSON from 'graphql-type-json';
 import RequestType from './models/Request/type';
 import RequestResolver from './models/Request/resolver';
 import Request from './models/Request';
 
 const typeDefs = gql`
+  scalar JSON
   ${RequestType}
 `;
 
 const resolvers = {
   ...RequestResolver,
+  JSON: GraphQLJSON,
 };
 
 const getContext = {
