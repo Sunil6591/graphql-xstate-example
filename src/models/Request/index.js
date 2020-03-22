@@ -42,8 +42,20 @@ export default class Request {
     return requests[index];
   }
 
-  onTransition({ value, nextEvents }) {
-    return Promise.resolve({ value, nextEvents });
+  async onTransition({ value, nextEvents, context }) {
+    const { request, error } = context;
+    if (!request.id) {
+      return;
+    }
+    const requestInput = {
+      id: request.id,
+      error: error ? error.toString() : '',
+      currentState: {
+        value,
+        nextEvents,
+      },
+    };
+    await this.updateRequests({ request: requestInput });
   }
 
   async executeRequest(args, context) {
