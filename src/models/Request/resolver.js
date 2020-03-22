@@ -1,3 +1,5 @@
+import { GUARDS } from '../../workflows/request';
+
 export default {
   Query: {
     request: (_, args, context) => context
@@ -22,5 +24,21 @@ export default {
       .models
       .Request
       .executeRequest(args, context),
+  },
+  Request: {
+    currentState: (request, _, context) => {
+      if (!request.currentState || !request.currentState.nextEvents) return request.currentState;
+      return {
+        ...request.currentState,
+        nextEvents: request.currentState.nextEvents
+          .filter((event) => {
+            const fn = GUARDS[event];
+            if (fn) {
+              return fn(request, context);
+            }
+            return true;
+          }),
+      };
+    },
   },
 };
