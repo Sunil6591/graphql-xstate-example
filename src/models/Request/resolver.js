@@ -1,5 +1,13 @@
 import { GUARDS } from '../../workflows/request';
 
+function getVacationRequestInfo() {
+  return {
+    vacationLeft: 10,
+    totalAllowedVacation: 22,
+    lastVacation: new Date('2020-01-01'),
+  };
+}
+
 export default {
   Query: {
     request: (_, args, context) => context
@@ -26,6 +34,10 @@ export default {
       .executeRequest(args, context),
   },
   Request: {
+    payload: async (request, _, context) => ({
+      ...request.payload,
+      ...getVacationRequestInfo(request, context),
+    }),
     currentState: (request, _, context) => {
       if (!request.currentState || !request.currentState.nextEvents) return request.currentState;
       return {
