@@ -23,7 +23,7 @@ export default {
     saveRequest: (_, args, context) => context
       .models
       .Request
-      .saveRequests(args, context),
+      .saveRequest(args, context),
     updateRequest: (_, args, context) => context
       .models
       .Request

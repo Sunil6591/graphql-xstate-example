@@ -15,7 +15,7 @@ export default `
     id: String
     type: String,
     error: String
-    payload: String
+    payload: JSON
     currentState: CurrentStateInput
   }
   input CurrentStateInput {

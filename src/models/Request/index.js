@@ -20,7 +20,7 @@ export default class Request {
     return requests.find((r) => r.id === id);
   }
 
-  saveRequests({ request }) {
+  saveRequest({ request }) {
     requests.push({
       ...request,
       payload: request.payload ? JSON.parse(request.payload) : {},
@@ -28,7 +28,7 @@ export default class Request {
     return request;
   }
 
-  updateRequests({ request }) {
+  updateRequest({ request }) {
     const index = requests.findIndex((r) => r.id === request.id);
     if (index === -1) return null;
     requests = [
@@ -44,18 +44,19 @@ export default class Request {
 
   async onTransition({ value, nextEvents, context }) {
     const { request, error } = context;
-    if (!request.id) {
-      return;
-    }
     const requestInput = {
-      id: request.id,
+      id: request.id || Date.now(),
       error: error ? error.toString() : '',
       currentState: {
         value,
         nextEvents,
       },
     };
-    await this.updateRequests({ request: requestInput });
+    if (!request.id) {
+      await this.saveRequest({ request: requestInput });
+      return;
+    }
+    await this.updateRequest({ request: requestInput });
   }
 
   async executeRequest(args, context) {
@@ -74,7 +75,7 @@ export default class Request {
         value: 'draft',
       },
     };
-    const service = await createService(stateContext, 'request', this.onTransition);
+    const service = await createService(stateContext, 'request', this.onTransition.bind(this));
     // Send events
     service.send(args.eventName);
     return true;
